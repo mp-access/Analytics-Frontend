@@ -11,7 +11,7 @@ const addReducer = (state = initialState, action) => {
     case ADD:
       return {
         ...state,
-        value: value + 1
+        value: value + action.payload
       };
     default:
       return state;
