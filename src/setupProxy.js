@@ -9,6 +9,13 @@ module.exports = function(app) {
         proxy('/metrics', {
             target: 'http://localhost:4000',
             changeOrigin: true,
+            pathRewrite: {
+                '^/metrics': '/', // remove base path
+            },
+        }),
+        proxy('/api', {
+            target: 'http://localhost:8080',
+            changeOrigin: true,
         }),
     );
 };

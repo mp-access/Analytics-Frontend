@@ -1,7 +1,9 @@
 import { combineReducers } from "redux";
-import addReducer from "./add";
+import metricsReducer from './metricsReducer';
+import coursesReducer from './coursesReducer';
 
 
 export default combineReducers({
-    addStore: addReducer
+    courses: coursesReducer,
+    metrics: metricsReducer
 });

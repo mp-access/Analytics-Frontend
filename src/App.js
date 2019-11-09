@@ -1,35 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-import { addOne } from './redux/actions';
+import { fetchCourses, fetchDistribution } from './redux/actions';
 import { connect } from 'react-redux';
+import PieChart from './components/PieChart';
 
 
-class App extends React.Component {
+const App = (props) => {
+    const { isLoading, metrics, fetchCourses, fetchDistribution } = props;
 
-    render() {
+    useEffect(() => {
+        if (!isLoading) {
+            fetchCourses();
+            fetchDistribution();
+        }
+    }, [isLoading, fetchCourses, fetchDistribution]);
 
-        return (
-            <main className="container-fluid">
-                <div id="content">
-                    <div className="container">
-                        <p>
-                            <button onClick={this.props.addOne}>Add one</button>
-                        </p>
-
-                        {this.props.addStore.value}
+    return (
+        <main className="container-fluid">
+            <div id="content">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div style={{ height: '500px' }}>
+                                <PieChart data={metrics.distributions}/>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </main>
-        );
-    }
-}
+            </div>
+        </main>
+    );
+};
 
 const mapStateToProps = state => ({
-    addStore: state.addStore,
+    metrics: state.metrics,
 });
 
 const mapDispatchToProps = {
-    addOne,
+    fetchCourses,
+    fetchDistribution,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
