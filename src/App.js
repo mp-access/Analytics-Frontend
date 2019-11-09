@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { addOne } from './redux/actions';
 import { connect } from 'react-redux';
@@ -10,18 +9,17 @@ class App extends React.Component {
     render() {
 
         return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <p>
-                        <button onClick={this.props.addOne}>Add one</button>
-                    </p>
+            <main className="container-fluid">
+                <div id="content">
+                    <div className="container">
+                        <p>
+                            <button onClick={this.props.addOne}>Add one</button>
+                        </p>
 
-                    {this.props.addStore.value}
-
-                </header>
-            </div>
-
+                        {this.props.addStore.value}
+                    </div>
+                </div>
+            </main>
         );
     }
 }
