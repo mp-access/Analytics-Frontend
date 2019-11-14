@@ -112,6 +112,7 @@ class Dashboard extends Component {
                                         <p>Maximum score for exercise: {metrics.maxScore}</p>
                                         <p>Total submissions: {metrics.totalSubmissions}</p>
                                         <p>Total graded submissions: {metrics.gradedSubmissions}</p>
+                                        <p>How many users submitted: {metrics.usersSubmitted}</p>
                                     </div>
                                     <div className={'col-md-9'}>
                                         {metrics.isLoading ? <Spinner/> : <PieChart data={metrics.distributions}/>}
