@@ -10,7 +10,7 @@ module.exports = function(app) {
             target: 'http://localhost:4000',
             changeOrigin: true,
             pathRewrite: {
-                '^/metrics': '/', // remove base path
+                '^/metrics': '', // remove base path
             },
         }),
         proxy('/api', {

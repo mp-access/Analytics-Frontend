@@ -1,7 +1,7 @@
 import { Actions } from '../actions';
 
 const initialState = {
-    courses: [],
+    courses: undefined,
     isLoading: false,
 };
 
