@@ -22,7 +22,7 @@ const metricsReducer = (state = initialState, action) => {
             const distributions = Object.keys(dist.distributions).map(key => {
                     return {
                         id: key,
-                        label: key,
+                        label: `# scored ${key} points`,
                         value: dist.distributions[key],
                     };
                 },
