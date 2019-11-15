@@ -1,4 +1,5 @@
 import AuthenticationService from '../../auth/Auth';
+import { authHeaders } from '../../Utils';
 
 const FETCH_DISTRIBUTION_SUCCESS = 'FETCH_DISTRIBUTION_SUCCESS';
 const FETCHING_DISTRIBUTION = 'FETCHING_DISTRIBUTION';
@@ -29,12 +30,15 @@ const initAuth = () => {
 };
 
 const fetchDistribution = (exerciseId) => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
         dispatch({
             type: Actions.FETCHING_DISTRIBUTION,
         });
 
-        const distribution = await fetch('/metrics/submissions/exercises/' + exerciseId)
+        const headers = authHeaders(getState().auth);
+        const distribution = await fetch('/metrics/submissions/exercises/' + exerciseId, {
+            headers,
+        })
             .then(response => response.json());
 
         dispatch({
@@ -46,14 +50,11 @@ const fetchDistribution = (exerciseId) => {
 
 const fetchCourses = () => {
     return async (dispatch, getState) => {
-        const { keycloak } = getState().auth;
-
         dispatch({
             type: Actions.FETCHING_COURSES,
         });
 
-        const headers = new Headers();
-        headers.append('Authorization', 'Bearer ' + keycloak.token);
+        const headers = authHeaders(getState().auth);
         const courses = await fetch('/api/courses', {
             headers: headers,
         }).then(response => response.json());
@@ -63,7 +64,6 @@ const fetchCourses = () => {
             payload: courses,
         });
     };
-
 };
 
 export { Actions, initAuth, fetchCourses, fetchDistribution };
